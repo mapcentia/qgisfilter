@@ -35,7 +35,7 @@ class Wms extends \app\inc\Controller
         fclose($mapFile);
 
         // Set SQL=
-        $str = str_replace("sql=", "sql=gid={$id}", $str);
+        $str = str_replace("sql=", "sql=planid={$id}", $str);
 
 
         $n = "/var/www/geocloud2/app/tmp/{$name}.qgs";
