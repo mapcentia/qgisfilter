@@ -29,7 +29,7 @@ class Wms extends \app\inc\Controller
 
         $name = md5(rand(1, 999999999) . microtime());
 
-        $e = "/var/www/geocloud2/app/wms/qgsfiles/parsed_test.qgs";
+        $e = "/var/www/geocloud2/app/wms/qgsfiles/parsed_lokalplan.qgs";
         $mapFile = fopen($e, "r");
         $str = fread($mapFile,filesize($e));
         fclose($mapFile);
