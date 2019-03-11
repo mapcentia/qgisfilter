@@ -40,10 +40,10 @@ class Wms extends \app\inc\Controller
         fclose($mapFile);
 
         // Set SQL=
-        if ($layerType !== "lokalplaner.dellokalplan") {
-            $str = str_replace("sql=", "sql=planid={$id}", $str);
+        if ($layerType === "lokalplaner.dellokalplan" || $layerType === "lokalplaner.byggefelt") {
+            $str = str_replace("sql=", "sql=lokalplan_id={$id}", $str);
         } else {
-            $str = str_replace("sql=", "sql=lokplan_id={$id}", $str);
+            $str = str_replace("sql=", "sql=planid={$id}", $str);
         }
 
         $n = "/var/www/geocloud2/app/tmp/{$name}.qgs";
