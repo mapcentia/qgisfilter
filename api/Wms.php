@@ -25,6 +25,11 @@ class Wms extends \app\inc\Controller
      */
     public function get_index()
     {
+
+        $parts = parse_url($_SERVER['REQUEST_URI']);
+        parse_str($parts['query'], $query);
+        $layerType = $query['layers'];
+
         $id = Route::getParam("id");
 
         $name = md5(rand(1, 999999999) . microtime());
@@ -35,8 +40,11 @@ class Wms extends \app\inc\Controller
         fclose($mapFile);
 
         // Set SQL=
-        $str = str_replace("sql=", "sql=planid={$id}", $str);
-
+        if ($layerType !== "lokalplaner.dellokalplan") {
+            $str = str_replace("sql=", "sql=planid={$id}", $str);
+        } else {
+            $str = str_replace("sql=", "sql=lokplan_id={$id}", $str);
+        }
 
         $n = "/var/www/geocloud2/app/tmp/{$name}.qgs";
         $newMapFile = fopen($n, "w");
